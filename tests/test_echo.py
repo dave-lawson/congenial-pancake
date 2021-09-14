@@ -17,6 +17,13 @@ def test_echo_correct_input(client):
     assert correct_response == value.get_json()
 
 
+def test_echo_correct_input_put_method(client):
+    post_data = {"username": "xyz", "upload": "xyz"}
+    correct_response = {"username": "xyz", "upload": "xyz", "echoed": True}
+    value = client.put('/api/echo', json=post_data)
+    assert correct_response == value.get_json()
+
+
 def test_echo_preexisting_field_true(client):
     post_data = {"username": "xyz", "upload": "xyz", "echoed": True}
     value = client.post('/api/echo', json=post_data)

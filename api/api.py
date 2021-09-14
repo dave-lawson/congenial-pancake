@@ -8,7 +8,7 @@ app.config["DEBUG"] = False
 PrometheusMetrics(app, group_by='endpoint')
 
 
-@app.route('/api/echo', methods=['POST'])
+@app.route('/api/echo', methods=['POST', 'PUT'])
 def echo():
     data = flask.request.get_json()
 
