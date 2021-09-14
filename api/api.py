@@ -14,17 +14,18 @@ def echo():
 
     # We only return the echoed item if it either doesn't currently exist
     # or is not already true.
-    if 'echoed' not in data or data['echoed'] is not True:
-        # Apparently it's quite hard to test whether a payload is valid JSON.
-        # This seems the easiest way to address that particular case, neither
-        # the is_json attribute nor checking the object type catch this issue
-        # for some reason.
-        try:
+    #
+    # Apparently it's quite hard to test whether a payload is valid JSON.
+    # This seems the easiest way to address that particular case, neither
+    # the is_json attribute nor checking the object type catch this issue
+    # for some reason.
+    try:
+        if 'echoed' not in data or data['echoed'] is not True:
             data['echoed'] = True
-        except TypeError:
+        # If the echoed item already exists and is true, return a 400.
+        else:
             return('Bad request data', 400)
-    # If the echoed item already exists and is true, return a 400.
-    else:
+    except TypeError:
         return('Bad request data', 400)
 
     return data
